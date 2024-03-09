@@ -14,16 +14,18 @@ const TaskBord = () => {
     property: "High",
     isFaverate: true,
   };
-
-  const handleAddTasks = (e) => {
-    e.preventDefault();
-    console.log("Cliked even");
-  };
   const [tasks, setTasks] = useState([defaultTask]);
   const [isTaskModalShow, setIsTaskModalShow] = useState(false);
+
+  const handleAddTasks = (newTask) => {
+    console.log(newTask);
+    setTasks([...tasks, newTask]);
+    setIsTaskModalShow(false);
+  };
+
   return (
     <section className="mb-20" id="tasks">
-      {isTaskModalShow && <AddTaskModal />}
+      {isTaskModalShow && <AddTaskModal onSave={handleAddTasks} />}
       <div className="container">
         <div className="p-2 flex justify-end">
           <SearchTask />
