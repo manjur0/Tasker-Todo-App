@@ -1,4 +1,4 @@
-import { IoStarOutline } from "react-icons/io5";
+
 import { IoStarSharp } from "react-icons/io5";
 
 const TaskList = ({ tasks }) => {
@@ -37,7 +37,13 @@ const TaskList = ({ tasks }) => {
                 key={task.id}
                 className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
               >
-                <td>{task.isFaverate ? <IoStarOutline /> : <IoStarSharp />}</td>
+                <td>
+                  {task.isFaverate ? (
+                    <IoStarSharp color="yellow" />
+                  ) : (
+                    <IoStarSharp />
+                  )}
+                </td>
                 <td>{task.title}</td>
                 <td>
                   <div>{task.description}</div>
