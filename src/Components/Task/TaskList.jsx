@@ -1,7 +1,7 @@
 import { IoStarSharp } from "react-icons/io5";
 import PropTypes from "prop-types";
 
-const TaskList = ({ tasks, onEdit, onDeleteTask }) => {
+const TaskList = ({ tasks, onEdit, onDeleteTask, onFav }) => {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -38,13 +38,14 @@ const TaskList = ({ tasks, onEdit, onDeleteTask }) => {
                   key={task.id}
                   className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
                 >
-                  <td>
-                    {task.isFaverate ? (
+                  <button onClick={() => onFav(task.id)}>
+                    {task.isFavorate ? (
                       <IoStarSharp color="yellow" />
                     ) : (
                       <IoStarSharp />
                     )}
-                  </td>
+                  </button>
+
                   <td>{task.title}</td>
                   <td>
                     <div>{task.description}</div>

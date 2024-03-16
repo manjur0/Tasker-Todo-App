@@ -12,7 +12,7 @@ const TaskBord = () => {
       "These symbols play various roles in programming languages and are used for tasks such as defining blocks of code, indicating the start and end of arrays or objects,",
     tags: ["web", "react", "tailwind"],
     property: "High",
-    isFaverate: true,
+    isFavorate: true,
   };
   const [tasks, setTasks] = useState([defaultTask]);
   const [isTaskModalShow, setIsTaskModalShow] = useState(false);
@@ -57,6 +57,14 @@ const TaskBord = () => {
     setTaskToUpdate(null);
   };
 
+  // Favorite Task
+  const handleFavorate = (taskId) => {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    const newTasks = [...tasks];
+    newTasks[taskIndex].isFavorate = !newTasks[taskIndex].isFavorate;
+    setTasks(newTasks);
+  };
+
   return (
     <section className="mb-20" id="tasks">
       {isTaskModalShow && (
@@ -81,6 +89,7 @@ const TaskBord = () => {
             setTasks={setTasks}
             onEdit={handleEditTask}
             onDeleteTask={handleDeleteTask}
+            onFav={handleFavorate}
           />
         </div>
       </div>
