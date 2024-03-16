@@ -3,6 +3,7 @@ import SearchTask from "./SearchTask";
 import TaskAction from "./TaskAction";
 import TaskList from "./TaskList";
 import AddTaskModal from "./AddTaskModal";
+import NoTaskFound from "./NoTaskFound";
 
 const TaskBord = () => {
   const defaultTask = {
@@ -65,6 +66,14 @@ const TaskBord = () => {
     setTasks(newTasks);
   };
 
+  //   Search Task
+  const handleSearch = (searchText) => {
+    console.log(searchText);
+    const filtered = tasks.filter((task) =>
+      task.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setTasks([...filtered]);
+  };
   return (
     <section className="mb-20" id="tasks">
       {isTaskModalShow && (
@@ -76,7 +85,7 @@ const TaskBord = () => {
       )}
       <div className="container">
         <div className="p-2 flex justify-end">
-          <SearchTask />
+          <SearchTask onSearch={handleSearch} />
         </div>
 
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
@@ -84,13 +93,17 @@ const TaskBord = () => {
             handleAddTasks={() => setIsTaskModalShow(true)}
             onDeleteAllTask={handleDeleteAllTask}
           />
-          <TaskList
-            tasks={tasks}
-            setTasks={setTasks}
-            onEdit={handleEditTask}
-            onDeleteTask={handleDeleteTask}
-            onFav={handleFavorate}
-          />
+          {tasks.length > 0 ? (
+            <TaskList
+              tasks={tasks}
+              setTasks={setTasks}
+              onEdit={handleEditTask}
+              onDeleteTask={handleDeleteTask}
+              onFav={handleFavorate}
+            />
+          ) : (
+            <NoTaskFound />
+          )}
         </div>
       </div>
     </section>
