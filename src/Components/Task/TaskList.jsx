@@ -1,7 +1,7 @@
 import { IoStarSharp } from "react-icons/io5";
 import PropTypes from "prop-types";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, onEdit, onDeleteTask }) => {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -65,8 +65,18 @@ const TaskList = ({ tasks }) => {
                   <td className="text-center">{task.property}</td>
                   <td>
                     <div className="flex items-center justify-center space-x-3">
-                      <button className="text-red-500">Delete</button>
-                      <button className="text-blue-500">Edit</button>
+                      <button
+                        onClick={() => onDeleteTask(task.id)}
+                        className="text-red-500"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => onEdit(task)}
+                        className="text-blue-500"
+                      >
+                        Edit
+                      </button>
                     </div>
                   </td>
                 </tr>
